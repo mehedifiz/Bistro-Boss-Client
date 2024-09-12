@@ -5,6 +5,7 @@ import About from './About';
 import PopularMenu from './PopularMenu';
 import Callus from './Callus';
 import Featured from './Featured';
+import Testmonials from './Testmonials';
 
 const Home = () => {
     return (
@@ -17,8 +18,9 @@ const Home = () => {
                 <Callus></Callus> 
 
 
-                <Featured></Featured>
-        </div>
+                    <Featured></Featured>   
+                    <Testmonials></Testmonials>
+       </div>
     );
 };
 

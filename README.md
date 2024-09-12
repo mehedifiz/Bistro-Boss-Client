@@ -10,3 +10,4 @@ Currently, two official plugins are available:
 # Bistro-Boss
 # Bistro-Boss
 # Bistro-Boss-Client
+# Owner-avatar-Bistro-Boss-Client2
