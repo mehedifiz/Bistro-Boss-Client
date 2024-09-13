@@ -6,7 +6,7 @@ const Navber = () => {
     <li><Link to='/'>Home</Link></li></>
     return (
         <>
-        <div className="navbar bg-base-200 bg-opacity-10 fixed z-10 text-white max-w-screen-xl mx-auto">
+        <div className="navbar bg-[#151515] bg-opacity-50 fixed z-10 text-white max-w-screen-xl mx-auto">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,7 +31,7 @@ const Navber = () => {
     </div>
     <div className="flex flex-col">
     <a className="  text-xl font-Cinzel uppercase tracking-widest text-white font-extrabold">Bistro Boss</a>
-    <a className="text-xl font-Cinzel uppercase tracking-[.400rem] text-gray-300 italic">Restaurant</a>
+    <a className="text-xl font-Cinzel uppercase tracking-[.400rem] text-gray-200 italic">Restaurant</a>
     </div>
   </div>
   <div className="navbar-center hidden lg:flex">

@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
       </div>
       {/* Footer Bottom Section */}
-      <div className="bg-[#151515] text-base-content text-center p-4">
+      <div className="bg-[#151515] text-white  text-center p-4">
         <p>Copyright © {new Date().getFullYear()} - All rights reserved by Bistro-Boss</p>
       </div>
     </footer>
