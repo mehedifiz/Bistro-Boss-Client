@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 
 const Navber = () => {
     const navlinks = <>
-     <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li></>
+     <li><Link to='/menu'>Our Menu</Link></li>
+    <li><Link to='/'>Home</Link></li></>
     return (
         <>
         <div className="navbar bg-base-200 bg-opacity-10 fixed z-10 text-white max-w-screen-xl mx-auto">
