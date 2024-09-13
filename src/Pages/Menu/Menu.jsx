@@ -11,13 +11,7 @@ const Menu = () => {
 
             </Helmet>
             <Cover img={img} title={'OUR MENU'} slogan={'Would you like to try a dish?'} ></Cover>
-            <PopularMenu></PopularMenu>
-
-            <Cover img={img} title={'OUR MENU'} slogan={'Would you like to try a dish?'} ></Cover>
-            <PopularMenu></PopularMenu>
-
-            <Cover img={img} title={'OUR MENU'} slogan={'Would you like to try a dish?'} ></Cover>
-            <PopularMenu></PopularMenu>
+          
         </div>
     );
 };
