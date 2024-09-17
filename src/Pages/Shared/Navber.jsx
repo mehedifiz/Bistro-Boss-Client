@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 const Navber = () => {
     const navlinks = <>
      <li><Link to='/menu'>Our Menu</Link></li>
-    <li><Link to='/'>Home</Link></li></>
+    <li><Link to='/'>Home</Link></li>
+    <li><Link to='/order'>Order Food</Link></li>
+    
+    </>
     return (
         <>
         <div className="navbar bg-[#151515] bg-opacity-50 fixed z-10 text-white max-w-screen-xl mx-auto">
