@@ -9,6 +9,7 @@ import dessertBg from '../../assets/menu/dessert-bg.jpeg'
 import pizzaBg from '../../assets/menu/pizza-bg.jpg'
 import soupBg from '../../assets/menu/soup-bg.jpg'
 import saladBg from '../../assets/menu/salad-bg.jpg'
+import Foodcard from "../../Comonents/foodcard";
 
 
 const Menu = () => {
@@ -63,6 +64,8 @@ const Menu = () => {
              slogan='Fresh, crisp, and full of flavor in every bite!'
               img={saladBg}
               ></MenuCategory>
+
+             
         </div>
 
         
