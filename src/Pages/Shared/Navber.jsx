@@ -5,6 +5,7 @@ const Navber = () => {
      <li><Link to='/menu'>Our Menu</Link></li>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/order/salad'>Order Food</Link></li>
+    <li><Link to='/login'>Login</Link></li>
     
     </>
     return (
@@ -34,7 +35,7 @@ const Navber = () => {
     </div>
     <div className="flex flex-col">
     <a className="  text-xl font-Cinzel uppercase tracking-widest text-white font-extrabold">Bistro Boss</a>
-    <a className="text-xl font-Cinzel uppercase tracking-[.400rem] text-gray-200 italic">Restaurant</a>
+    <a className="md:text-xl text-sm font-Cinzel uppercase tracking-[.400rem] text-gray-200 italic">Restaurant</a>
     </div>
   </div>
   <div className="navbar-center hidden lg:flex">
