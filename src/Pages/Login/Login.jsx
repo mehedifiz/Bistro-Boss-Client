@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { Authcontext } from "../../firebase/Providers/Authprovider";
 
 const Login = () => {
     const captchaRef = useRef();
-    const [allow , setAllow] = useState(true)
+    const [allow , setAllow] = useState(true);
+    const {login } = useContext(Authcontext)
 
     useEffect(()=>{
         loadCaptchaEnginge(6); 
@@ -16,7 +18,11 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log({email , password})
+        login(email , password)
+        .then(res =>{
+          const user = res.user;
+          console.log(user)
+        })
 
     }
 
@@ -33,6 +39,11 @@ const Login = () => {
             }
       }
     return (
+      <>
+       <Helmet>
+                <title>Bistro |Login</title>
+
+            </Helmet>
         <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col md:flex-row lg:flex-row">
           <div className="text-center  md:w-1/2 lg:text-left">
@@ -75,7 +86,7 @@ const Login = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div></>
     )
   }
   
