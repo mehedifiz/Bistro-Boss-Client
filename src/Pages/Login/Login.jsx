@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { Authcontext } from "../../firebase/Providers/Authprovider";
 import { toast } from "react-toastify";
@@ -10,7 +10,12 @@ import img from '../../assets/others/authentication1.png'
 const Login = () => {
     const captchaRef = useRef();
     const [allow , setAllow] = useState(true);
-    const {login } = useContext(Authcontext)
+    const {login } = useContext(Authcontext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    
+    const from = location.state?.from?.pathname;
+    console.log(from)
 
     useEffect(()=>{
         loadCaptchaEnginge(6); 
@@ -27,6 +32,10 @@ const Login = () => {
         login(email, password)
   .then((res) => {
     const user = res.user;
+
+    navigate(from ? from : '/' ,{replace: true})
+
+
     toast.success("Logged in successfully!");
   })
   .catch((err) => {
