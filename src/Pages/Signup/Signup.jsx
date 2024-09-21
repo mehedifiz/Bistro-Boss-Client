@@ -3,6 +3,9 @@ import img from '../../assets/others/authentication2.png';
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { Authcontext } from "../../firebase/Providers/Authprovider";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 const Signup = () => {
 
@@ -16,6 +19,7 @@ const Signup = () => {
         .then(res=>{
             const logeduser = res.user;
             console.log(logeduser)
+            toast('Easy')
         })
     }
 
@@ -97,6 +101,7 @@ const Signup = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Sign Up</button>
                         </div>
+                        <p className="">Already have an account ?  <Link to='/login'><span className="link text-orange-500 font-bold" > Login Here.</span></Link></p>
 
                     </form>
                 </div>

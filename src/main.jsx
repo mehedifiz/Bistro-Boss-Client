@@ -9,6 +9,7 @@ import {
 import { router } from './Routes/Routes.jsx';
 import { HelmetProvider } from 'react-helmet-async';
 import Authprovider from './firebase/Providers/Authprovider.jsx';
+import { ToastContainer } from 'react-toastify';
 
 
 createRoot(document.getElementById('root')).render(
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
        <RouterProvider router={router} />
 
       </div></HelmetProvider>
+      <ToastContainer />
     </Authprovider>
       </StrictMode>,
 )

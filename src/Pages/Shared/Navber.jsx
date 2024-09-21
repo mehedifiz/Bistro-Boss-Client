@@ -1,14 +1,48 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Authcontext } from "../../firebase/Providers/Authprovider";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Navber = () => {
+  const {user ,logout} = useContext(Authcontext)
+  const handleLogout = ()=>{
+    logout()
+  
+    .then(() => {
+      // Success message using toast
+      toast.success("Logout successful!");
+    })
+    .catch((error) => {
+      // Handle any errors
+      toast.error(`Error logging out: ${error.message}`);
+    });
+  }
     const navlinks = <>
-     <li><Link to='/menu'>Our Menu</Link></li>
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/order/salad'>Order Food</Link></li>
-    <li><Link to='/login'>Login</Link></li>
-    <li><Link to='/signup'>signup</Link></li>
+     <li><Link  className="btn btn-ghost" to='/menu'>Our Menu</Link></li>
+    <li><Link  className="btn btn-ghost" to='/'>Home</Link></li>
+    <li><Link  className="btn btn-ghost" to='/order/salad'>Order Food</Link></li>
+    <li><Link  className="btn btn-ghost" to='/secret'>sc</Link></li>
+   
+    
+
+    {
+      user ? <>
+          <Link onClick={handleLogout} className="btn btn-ghost">Logout</Link>
+      
+      </>  :
+      
+      <>
+      <li><Link  className="btn btn-ghost" to='/signup'>signup</Link></li>
+       <li><Link className="btn btn-ghost" to='/login'>Login</Link></li>
+      </>
+    }
     
     </>
+
+
+
     return (
         <>
         <div className="navbar bg-[#151515] bg-opacity-50 fixed z-10 text-white max-w-screen-xl mx-auto">
