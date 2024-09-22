@@ -1,7 +1,38 @@
+import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
+
 
 const Foodcard = ({item}) => {
 
+  const {user} = useAuth();
+
     const {name ,recipe, img, price } =item;
+
+    const handleAddtoCart =(item)=>{
+
+        if( user && user?.email){
+
+
+
+        }
+      else{
+        
+        Swal.fire({
+          title: "Login Required",
+          text: "You need to log in to access your cart.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Login Now",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Redirect to the login page
+            window.location.href = "/login";
+          }
+        });
+      }
+
+    }
 
     return (
         <div className="card bg-slate-50 w-96 shadow-xl relative">
@@ -20,7 +51,9 @@ const Foodcard = ({item}) => {
             {recipe}
           </p>
           <div className="card-actions justify-center mt-4">
-            <button className="btn w-full bg-slate-100 text-orange-600 border-0 border-b-2 border-orange-600 hover:bg-gray-800 hover:text-orange-600 ">ADD TO CART</button>
+            <button onClick={()=>handleAddtoCart(item)}
+            
+            className="btn w-full bg-slate-100 text-orange-600 border-0 border-b-2 border-orange-600 hover:bg-gray-800 hover:text-orange-600 ">ADD TO CART</button>
           </div>
         </div>
       </div>

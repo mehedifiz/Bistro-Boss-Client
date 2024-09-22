@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Authcontext } from "../../firebase/Providers/Authprovider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { BsCart3 } from "react-icons/bs";
 
 
 const Navber = () => {
@@ -20,15 +21,22 @@ const Navber = () => {
     });
   }
     const navlinks = <>
-     <li><Link  className="btn btn-ghost" to='/menu'>Our Menu</Link></li>
     <li><Link  className="btn btn-ghost" to='/'>Home</Link></li>
+     <li><Link  className="btn btn-ghost" to='/menu'>Our Menu</Link></li>
     <li><Link  className="btn btn-ghost" to='/order/salad'>Order Food</Link></li>
     <li><Link  className="btn btn-ghost" to='/secret'>sc</Link></li>
+    <li><Link  className="btn btn-ghost" to='/'>
+    <button className="btn">
+    <BsCart3 />
+  <div className="badge badge-secondary">+0</div>
+</button>
+    </Link></li>
    
     
 
     {
       user ? <>
+        {/* <span className="btn btn-ghost">{user?.displayName}</span> */}
           <Link onClick={handleLogout} className="btn btn-ghost">Logout</Link>
       
       </>  :

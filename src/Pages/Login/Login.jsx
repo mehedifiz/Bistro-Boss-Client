@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from "react-helmet-async";
 import img from '../../assets/others/authentication1.png'
+import { RiRobot2Fill } from "react-icons/ri";
 
 const Login = () => {
     const captchaRef = useRef();
@@ -94,7 +95,7 @@ const Login = () => {
                 </label>
                 <div className="flex border">
                 <input type="text" ref={captchaRef} name="captcha" placeholder="Type the captcha" className="input input-bordered w-5/6" required />
-                <button type="button" className="btn btn-square " onClick={validate}>DD</button>
+                <button type="button" className="btn btn-square " onClick={validate}><RiRobot2Fill /></button>
                 </div>
               </div>
               <div className="form-control mt-6">

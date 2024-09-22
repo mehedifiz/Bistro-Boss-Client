@@ -5,13 +5,14 @@ import { useContext } from "react";
 import { Authcontext } from "../../firebase/Providers/Authprovider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+    const navigate = useNavigate()
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
 
-    const { createUser} = useContext(Authcontext)
+    const { createUser , updateUserProfile} = useContext(Authcontext)
 
     const onSubmit = data => {
         console.log(data);
@@ -19,7 +20,17 @@ const Signup = () => {
         .then(res=>{
             const logeduser = res.user;
             console.log(logeduser)
-            toast('Easy')
+            toast('Easy');
+            navigate('/')
+            updateUserProfile(data.name , data.photoURL)
+            .then(()=>{
+               
+                toast.success('User profile update');
+                reset()
+            })
+            .catch(error =>{
+                console.log(error)
+            })
         })
     }
 
@@ -59,6 +70,19 @@ const Signup = () => {
                                 className="input input-bordered" 
                             />
                             {errors.name && <span className="text-red-600">{errors.name.message}</span>}
+                        </div>
+                        {/* Name Field */}
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo Url</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                {...register('photoURL', { required: "Name is required" })} 
+                                placeholder="photo URL" 
+                                className="input input-bordered" 
+                            />
+                            {errors.photoURL && <span className="text-red-600">{errors.name?.message}</span>}
                         </div>
 
                         {/* Email Field */}

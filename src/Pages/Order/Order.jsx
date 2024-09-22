@@ -2,16 +2,17 @@ import ordercover from '../../assets/shop/banner2.jpg'
 import 'react-tabs/style/react-tabs.css';
 import Cover from '../../Comonents/Cover';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import useMenu from '../../Hooks/useMenu';
 import Ordertab from './Ordertab';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { Authcontext } from '../../firebase/Providers/Authprovider';
 const Order = () => {
   const categories = ['salad' , 'pizza' , 'soup' , 'dessert' , 'drinks'];
   const {category} = useParams()
   const initaialndex = categories.indexOf(category);
-  
+  const {loading} = useContext(Authcontext)
     const [tabIndex , setTabIndex]  = useState(initaialndex)
 
     const [menu] = useMenu()
@@ -23,6 +24,7 @@ const Order = () => {
     const salad = menu.filter(item => item.category === 'salad')
     const drinks = menu.filter(item => item.category === 'salad')
     const offered =menu.filter(item => item.category === 'offered')
+  
 
 
     return (
@@ -35,6 +37,7 @@ const Order = () => {
             title='Order Food'
             slogan='Would you like to try a dish?'
             ></Cover>
+            
 
 <Tabs className='mt-24 ' selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
       <TabList>
