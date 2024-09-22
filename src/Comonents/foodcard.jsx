@@ -1,21 +1,48 @@
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 
 const Foodcard = ({item}) => {
 
+  const location = useLocation();
+  const navigate = useNavigate()
+  
   const {user} = useAuth();
-
-    const {name ,recipe, img, price } =item;
-
-    const handleAddtoCart =(item)=>{
-
+  
+  const {name ,recipe, img, price ,_id } =item;
+  
+  const handleAddtoCart =(food)=>{
+    
+    console.log(location)
         if( user && user?.email){
 
+            console.log(user?.email , food)
 
+            const cartItem ={
+
+               menuId: _id,
+               email:user.email,
+               name,
+               img,
+               price
+
+
+            }
+
+          axios.post('http://localhost:5000/carts' , cartItem)
+          .then(res =>{
+           if(res.data.insertedId){
+            toast.success(`${name} added to your cart`)
+           }
+          })
 
         }
       else{
+
+
         
         Swal.fire({
           title: "Login Required",
@@ -27,7 +54,7 @@ const Foodcard = ({item}) => {
         }).then((result) => {
           if (result.isConfirmed) {
             // Redirect to the login page
-            window.location.href = "/login";
+            navigate('/login' , {state:{from:location}})
           }
         });
       }
