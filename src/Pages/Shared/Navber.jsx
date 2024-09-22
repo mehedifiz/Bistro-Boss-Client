@@ -4,10 +4,12 @@ import { Authcontext } from "../../firebase/Providers/Authprovider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { BsCart3 } from "react-icons/bs";
+import useCart from "../../Hooks/useCart";
 
 
 const Navber = () => {
-  const {user ,logout} = useContext(Authcontext)
+  const {user ,logout} = useContext(Authcontext);
+  const [cart] = useCart()
   const handleLogout = ()=>{
     logout()
   
@@ -28,7 +30,7 @@ const Navber = () => {
     <li><Link  className="btn btn-ghost" to='/'>
     <button className="btn">
     <BsCart3 />
-  <div className="badge badge-secondary">+0</div>
+  <div className="badge badge-secondary">+{cart.length}</div>
 </button>
     </Link></li>
    

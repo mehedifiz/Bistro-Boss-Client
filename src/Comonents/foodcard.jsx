@@ -1,25 +1,27 @@
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
+import useAxios from "../Hooks/useAxios";
+import useCart from "../Hooks/useCart";
 
 
 const Foodcard = ({item}) => {
 
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const AxiosSecure=useAxios();
+  const [,refetch] =useCart()
   
   const {user} = useAuth();
   
   const {name ,recipe, img, price ,_id } =item;
   
-  const handleAddtoCart =(food)=>{
+  const handleAddtoCart =()=>{
     
     console.log(location)
         if( user && user?.email){
 
-            console.log(user?.email , food)
 
             const cartItem ={
 
@@ -32,11 +34,13 @@ const Foodcard = ({item}) => {
 
             }
 
-          axios.post('http://localhost:5000/carts' , cartItem)
+          AxiosSecure.post('/carts' , cartItem)
           .then(res =>{
            if(res.data.insertedId){
             toast.success(`${name} added to your cart`)
            }
+          refetch()
+
           })
 
         }
@@ -57,6 +61,8 @@ const Foodcard = ({item}) => {
             navigate('/login' , {state:{from:location}})
           }
         });
+        //refetch the cart to update the cart
+
       }
 
     }
