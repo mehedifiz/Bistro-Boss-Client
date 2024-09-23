@@ -27,7 +27,7 @@ const Navber = () => {
      <li><Link  className="btn btn-ghost" to='/menu'>Our Menu</Link></li>
     <li><Link  className="btn btn-ghost" to='/order/salad'>Order Food</Link></li>
     <li><Link  className="btn btn-ghost" to='/secret'>sc</Link></li>
-    <li><Link  className="btn btn-ghost" to='/'>
+    <li><Link  className="btn btn-ghost" to='/deshboard/cart'>
     <button className="btn">
     <BsCart3 />
   <div className="badge badge-secondary">+{cart.length}</div>

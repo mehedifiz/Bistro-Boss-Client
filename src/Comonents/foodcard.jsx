@@ -11,11 +11,11 @@ const Foodcard = ({item}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const AxiosSecure=useAxios();
-  const [,refetch] =useCart()
+  const [  ,refetch ] =useCart()
   
   const {user} = useAuth();
   
-  const {name ,recipe, img, price ,_id } =item;
+  const {name ,recipe, img, price ,_id , category } =item;
   
   const handleAddtoCart =()=>{
     
@@ -29,7 +29,8 @@ const Foodcard = ({item}) => {
                email:user.email,
                name,
                img,
-               price
+               price,
+               category
 
 
             }

@@ -7,6 +7,8 @@ import Login from "../Pages/Login/Login";
 import Signup from "../Pages/SIgnup/SIgnup";
 import PrivateRoute from "./PrivateRoute";
 import Screet from "../screet";
+import Deshboard from "../Layout/Deshboard";
+import Cart from "../Pages/Deshboard/Cart/Cart";
 
 
 
@@ -44,5 +46,16 @@ export const router = createBrowserRouter([
 
       ]
     },
+
+    {
+      path:'/deshboard',
+      element:<Deshboard></Deshboard>,
+      children:  [
+        {
+          path: 'cart',
+          element:<Cart></Cart>
+        },
+      ]
+    }
   ]);
   

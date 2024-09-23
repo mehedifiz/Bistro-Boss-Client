@@ -7,7 +7,7 @@ const useCart = () => {
     const {user} = useAuth();
 
     //tan stack
-    const {refetch ,data:cart=[]} = useQuery({
+    const  {  refetch ,data:cart=[]} = useQuery({
         queryKey:['cart' , user?.email],
         queryFn:async()=>{
             const res = await AxiosSecure.get(`/carts?email=${user.email}`)
@@ -18,7 +18,7 @@ const useCart = () => {
 
     })
 
-    return [cart , refetch]
+    return [cart , refetch ]
 
 
 };
