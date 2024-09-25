@@ -6,9 +6,12 @@ import { Authcontext } from "../../firebase/Providers/Authprovider";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Comonents/SocialLogin";
 
 const Signup = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const AxiosPublic = useAxiosPublic();
 
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
 
@@ -24,6 +27,21 @@ const Signup = () => {
             navigate('/')
             updateUserProfile(data.name , data.photoURL)
             .then(()=>{
+
+                const userInfo = {
+                    name : data.name ,
+                    email : data.email ,
+
+                }
+
+                AxiosPublic.post('/users' , userInfo)
+                .then(res =>{
+                    if(res.data.insertedId){
+                        console.log(res)
+                        alert()
+                    }
+                })
+                reset()
                
                 toast.success('User profile update');
                 reset()
@@ -128,6 +146,7 @@ const Signup = () => {
                         <p className="">Already have an account ?  <Link to='/login'><span className="link text-orange-500 font-bold" > Login Here.</span></Link></p>
 
                     </form>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

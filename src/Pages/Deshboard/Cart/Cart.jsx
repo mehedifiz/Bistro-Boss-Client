@@ -17,10 +17,7 @@ const Cart = () => {
         .then(res =>{
           
           refetch()
-
-         
-          
-        })
+             })
      
       
 

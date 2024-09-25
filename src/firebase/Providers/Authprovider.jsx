@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase.config";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 
 export const Authcontext = createContext(null);
 
@@ -21,6 +22,17 @@ const Authprovider = ({ children }) => {
     // Fix: pass the auth object as the first argument
     return signInWithEmailAndPassword(auth, email, password);
   };
+
+    const GoogleAuth= new GoogleAuthProvider;
+
+    const googleLogin = ()=>{
+    setLoading(true)
+
+      return signInWithPopup(auth , GoogleAuth)
+    }
+
+
+
 
   const logout = () => {
     setLoading(true)
@@ -49,7 +61,8 @@ const Authprovider = ({ children }) => {
     createUser,
     logout,
     login,
-    updateUserProfile
+    updateUserProfile,
+    googleLogin
   };
 
   return <Authcontext.Provider value={authInfo}>{children}</Authcontext.Provider>;

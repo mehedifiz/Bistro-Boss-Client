@@ -4,11 +4,11 @@ import Home from "../Pages/Home/Home";
 import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order";
 import Login from "../Pages/Login/Login";
-import Signup from "../Pages/SIgnup/SIgnup";
 import PrivateRoute from "./PrivateRoute";
 import Screet from "../screet";
 import Deshboard from "../Layout/Deshboard";
 import Cart from "../Pages/Deshboard/Cart/Cart";
+import Signup from "../Pages/Signup/Signup";
 
 
 
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
 
     {
       path:'/deshboard',
-      element:<Deshboard></Deshboard>,
+      element:<PrivateRoute><Deshboard></Deshboard></PrivateRoute>,
       children:  [
         {
           path: 'cart',

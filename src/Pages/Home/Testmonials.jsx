@@ -37,7 +37,7 @@ const Testmonials = () => {
       readOnly
     />
              
-            <p className='px-11 text-center font-Inter  '>{review.details}</p>
+            <p className='md:px-11 text-center font-Inter  '>{review.details}</p>
             <h3 className='text-2xl text-orange-600 font-Inter '>{review.name}</h3>
 
 
