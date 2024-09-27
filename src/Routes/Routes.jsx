@@ -9,6 +9,7 @@ import Screet from "../screet";
 import Deshboard from "../Layout/Deshboard";
 import Cart from "../Pages/Deshboard/Cart/Cart";
 import Signup from "../Pages/Signup/Signup";
+import Allusers from "../Pages/Deshboard/Allusers/Allusers";
 
 
 
@@ -55,6 +56,15 @@ export const router = createBrowserRouter([
           path: 'cart',
           element:<Cart></Cart>
         },
+          //admin 
+
+          {
+            path:'uers',
+            element:<Allusers></Allusers>
+          }
+
+
+
       ]
     }
   ]);

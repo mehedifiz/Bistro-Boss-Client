@@ -1,28 +1,43 @@
 import React from "react";
 import useCart from "../../../Hooks/useCart";
 import { FaTrash } from "react-icons/fa6";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const Cart = () => {
-  const [ ,refetch ] =useCart()
+  const [ ,refetch ] = useCart();
+  const axiosSecure = useAxios();
 
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    });
 
-  const axiosSecure = useAxios()
-
-    const handeleDelete =(id)=>{
-
-
-      axiosSecure.delete(`/carts/${id}`)
-        .then(res =>{
-          
-          refetch()
-             })
-     
-      
-
-
+    if (result.isConfirmed) {
+      try {
+        await axiosSecure.delete(`/carts/${id}`);
+        refetch();
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your item has been deleted.",
+          icon: "success"
+        });
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "There was a problem deleting the item.",
+          icon: "error"
+        });
+      }
     }
+  };
   const [cart] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   return (
@@ -81,7 +96,7 @@ const Cart = () => {
       </td>
       <td>${item.price}</td> {/* Use dynamic color */}
       <th>
-        <button onClick={()=> handeleDelete(item._id)}  className="btn btn-ghost btn-xl"><FaTrash className="text-orange-700"></FaTrash></button>
+        <button onClick={()=> handleDelete(item._id)}  className="btn btn-ghost btn-xl"><FaTrash className="text-orange-700"></FaTrash></button>
       </th>
     </tr>
   ))
