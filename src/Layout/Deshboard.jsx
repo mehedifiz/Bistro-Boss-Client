@@ -5,12 +5,14 @@ import { MdEmail, MdFoodBank, MdReviews } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../Hooks/useCart";
 import { BiBook } from "react-icons/bi";
+import useAdmin from "../Hooks/useAdmin";
 
 const Deshboard = () => {
     const [cart] = useCart();
 
     // todo : get isAdmin value from the database ;
-    const isAdmin = true ;
+    const [isAdmin] = useAdmin() ;
+    // const isAdmin = true ;
 
     return (
         <div className="flex">
@@ -33,7 +35,7 @@ const Deshboard = () => {
                     <NavLink to='/deshboard/manageBookings'>  <BiBook/> Manage bookings</NavLink>
                     </li>
                 <li>
-                    <NavLink to='/deshboard/uers'>  <FaUsers/> All user</NavLink>
+                    <NavLink to='/deshboard/users'>  <FaUsers/> All user</NavLink>
                     </li>
 
                     

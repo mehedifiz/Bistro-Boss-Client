@@ -10,6 +10,8 @@ import Deshboard from "../Layout/Deshboard";
 import Cart from "../Pages/Deshboard/Cart/Cart";
 import Signup from "../Pages/Signup/Signup";
 import Allusers from "../Pages/Deshboard/Allusers/Allusers";
+import AdminRoute from "./AdminRoute";
+import Additems from "../Pages/Deshboard/Additems/Additems";
 
 
 
@@ -48,6 +50,7 @@ export const router = createBrowserRouter([
       ]
     },
 
+    //admin 
     {
       path:'/deshboard',
       element:<PrivateRoute><Deshboard></Deshboard></PrivateRoute>,
@@ -55,12 +58,14 @@ export const router = createBrowserRouter([
         {
           path: 'cart',
           element:<Cart></Cart>
+        },{
+          path:'additems',
+          element: <AdminRoute><Additems></Additems></AdminRoute>
         },
-          //admin 
 
           {
-            path:'uers',
-            element:<Allusers></Allusers>
+            path:'users',
+            element: <AdminRoute><Allusers/></AdminRoute>
           }
 
 

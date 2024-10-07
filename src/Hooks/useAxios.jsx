@@ -11,11 +11,10 @@ const useAxios = () => {
 
     const navigate = useNavigate();
 
-    //request with interceptors to add authorzition header for every sucure call to api
+    
 
     AxiosSecure.interceptors.request.use(function(config){
         const token = localStorage.getItem('access-token');
-        console.log('req stoped by interceptors' ,token);
 
         config.headers.authorization = `Bearer ${token}`
         
@@ -46,7 +45,7 @@ const useAxios = () => {
 
             }
 
-            return Promise.reject(status);
+            return Promise.reject(error);
 
 
         })
