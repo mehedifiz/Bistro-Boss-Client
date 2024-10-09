@@ -3,12 +3,15 @@ import Sectiontitle from "../../../Comonents/Sectiontitle";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import useAxios from "../../../Hooks/useAxios";
+import { toast } from "react-toastify";
 
 const imageHosting =  import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
 const Additems = () => {
   const { register, handleSubmit } = useForm();
-  const axiosPublic = useAxiosPublic(); 
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure= useAxios()
 
 
   const imageHosting_api =`https://api.imgbb.com/1/upload?key=${imageHosting}`
@@ -24,7 +27,31 @@ const Additems = () => {
       const res = await axiosPublic.post(imageHosting_api, formData); 
   
       console.log(res.data);
-  
+      if(res.data.success){
+        //send the menu items data with image url
+          const menuItem = {
+            name : data.name,
+            price : parseInt(data.price),
+            category : data.category,
+            recipe : data.recipe,
+            image : res.data.data.display_url
+
+          }
+
+          //send meni items in backend or database
+
+          const menuRes = await axiosSecure.post('/menu' , menuItem)
+
+          if(menuRes.data.insertedId){
+
+            toast.success(`${menuItem.name} added in menu page. `)
+
+          }
+
+          
+
+      }
+
     
   };
   
