@@ -22,7 +22,6 @@ const SocialLogin = () => {
                 name : res.user.displayName
             }
 
-            console.log(res)
             AxiosPublic.post('/users' , userInfo)
             .then(res =>{
                 navigate('/')

@@ -12,6 +12,7 @@ import Signup from "../Pages/Signup/Signup";
 import Allusers from "../Pages/Deshboard/Allusers/Allusers";
 import AdminRoute from "./AdminRoute";
 import Additems from "../Pages/Deshboard/Additems/Additems";
+import Manageitems from "../Pages/Deshboard/Manageitems/Manageitems";
 
 
 
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
           {
             path:'users',
             element: <AdminRoute><Allusers/></AdminRoute>
+          },
+          {
+            path: 'manageitems',
+            element:<AdminRoute><Manageitems/></AdminRoute>
           }
 
 

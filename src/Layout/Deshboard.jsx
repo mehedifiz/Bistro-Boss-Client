@@ -29,7 +29,7 @@ const Deshboard = () => {
                     <NavLink to='/deshboard/addItems'>  <CgAdd />Add Item</NavLink>
                     </li>
                 <li>
-                    <NavLink to='/deshboard/manageItems'>  <FaList/> manage items</NavLink>
+                    <NavLink to='/deshboard/manageitems'>  <FaList/> manage items</NavLink>
                     </li>
                 <li>
                     <NavLink to='/deshboard/manageBookings'>  <BiBook/> Manage bookings</NavLink>
