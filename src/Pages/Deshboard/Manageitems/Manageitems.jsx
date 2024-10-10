@@ -8,6 +8,7 @@ import { BiRepost } from "react-icons/bi";
 import useAxios from "../../../Hooks/useAxios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Manageitems = () => {
   const [menu, loading, refetch] = useMenu();
@@ -78,12 +79,13 @@ const Manageitems = () => {
 
                 <td>${item.price}</td>
                 <td>
-                  <button
-                    onClick={() => handleUpdate(item)}
+                    <Link to={`/deshboard/updateitem/${item._id}`}>
+                    <button
+                    // onClick={() => handleUpdate(item)}
                     aria-label="Update "
                   >
                     <BiRepost className="text-orange-400 text-2xl" />
-                  </button>
+                  </button></Link>
                 </td>
                 <td>
                   <button
