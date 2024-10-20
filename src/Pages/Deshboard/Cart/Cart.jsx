@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa6";
 import axios from "axios";
 import useAxios from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [ ,refetch ] = useCart();
@@ -45,7 +46,15 @@ const Cart = () => {
       <div className=" flex justify-evenly">
         <h2 className="text-4xl">Items : {cart.length}</h2>
         <h2 className="text-4xl">Total Price : ${totalPrice}</h2>
-        <button className="btn btn-secondary">Payment</button>
+       {
+        cart.length ?  <Link to='/deshboard/payment'>
+        <button
+         className="btn btn-secondary">Payment
+         </button>
+         </Link> : <button disabled
+         className="btn btn-secondary">Payment
+         </button>
+       }
       </div>
 
       <div className="overflow-x-auto">

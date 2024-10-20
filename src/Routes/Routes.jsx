@@ -14,6 +14,7 @@ import AdminRoute from "./AdminRoute";
 import Additems from "../Pages/Deshboard/Additems/Additems";
 import Manageitems from "../Pages/Deshboard/Manageitems/Manageitems";
 import Updateitem from "../Pages/Deshboard/Updateitem/Updateitem";
+import Payment from "../Pages/Deshboard/Payment/Payment";
 
 
 
@@ -52,7 +53,6 @@ export const router = createBrowserRouter([
       ]
     },
 
-    //admin 
     {
       path:'/deshboard',
       element:<PrivateRoute><Deshboard></Deshboard></PrivateRoute>,
@@ -60,7 +60,14 @@ export const router = createBrowserRouter([
         {
           path: 'cart',
           element:<Cart></Cart>
-        },{
+        },
+        {
+          path: 'payment',
+          element: <Payment></Payment>
+        },
+          //admin 
+        
+        {
           path:'additems',
           element: <AdminRoute><Additems></Additems></AdminRoute>
         },
@@ -75,7 +82,7 @@ export const router = createBrowserRouter([
         },{
           path: 'updateitem/:id',
           element: <AdminRoute ><Updateitem/> </AdminRoute> ,
-          loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
+          loader: async ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
                }
 
 
