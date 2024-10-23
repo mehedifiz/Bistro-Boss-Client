@@ -14,7 +14,7 @@ const CheckOutfrom = () => {
   const {user} = useAuth();
   const [transectionID , setTransectionID] = useState('')
 
-  const [cart] = useCart();
+  const [cart , refetch] = useCart();
 
   const[clientSecret , setClientSecret] = useState('')
 
@@ -24,11 +24,13 @@ const CheckOutfrom = () => {
     useEffect(()=>{
 
 
+     if(price  > 0){
       axiosSecure.post('/create-payment-intrent', {price})
       .then(res=>{
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret)
       })
+     }
 
     }
 
@@ -57,7 +59,6 @@ const CheckOutfrom = () => {
                 setError(error.message)
             } else{
               setError('')
-              console.log('payment mathod ',paymentMethod)
             
             }
 
@@ -85,21 +86,23 @@ const CheckOutfrom = () => {
             if(paymentIntent.status === 'succeeded'){
               toast.success(`Payment succeeded` ,paymentIntent.id )
               setTransectionID(paymentIntent.id)
-
+                console.log(transectionID)
               //save payment in the database 
               const payment ={
                 email: user.email,
                 price ,
-                transectionID : transectionID,
+                transectionID :  paymentIntent.id,
                 date : new Date() ,// todo :  moment js
                 cartIds : cart.map(item => item._id),
                 menuitemIds : cart.map(item => item.menuId),
                 status : 'Pending',
                  }
-                 console.log(payment)
+
+                 console.log('this  is payment ' ,payment)
 
             const res = await  axiosSecure.post('/payments' , payment);
              console.log( " save payment " , res.data)
+             refetch()
             }
 
             

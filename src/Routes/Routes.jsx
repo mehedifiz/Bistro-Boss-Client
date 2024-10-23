@@ -15,6 +15,7 @@ import Additems from "../Pages/Deshboard/Additems/Additems";
 import Manageitems from "../Pages/Deshboard/Manageitems/Manageitems";
 import Updateitem from "../Pages/Deshboard/Updateitem/Updateitem";
 import Payment from "../Pages/Deshboard/Payment/Payment";
+import PaymentHistory from "../Pages/Deshboard/Payment/PaymentHistory";
 
 
 
@@ -64,6 +65,9 @@ export const router = createBrowserRouter([
         {
           path: 'payment',
           element: <Payment></Payment>
+        },{
+          path: 'payment-history',
+          element: <PaymentHistory></PaymentHistory>
         },
           //admin 
         

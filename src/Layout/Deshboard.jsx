@@ -7,6 +7,8 @@ import useCart from "../Hooks/useCart";
 import { BiBook } from "react-icons/bi";
 import useAdmin from "../Hooks/useAdmin";
 import { useState } from "react"; // Import useState for managing drawer state
+import { LiaHistorySolid } from "react-icons/lia";
+import { RiHistoryLine } from "react-icons/ri";
 
 const Deshboard = () => {
     const [cart] = useCart();
@@ -72,8 +74,8 @@ const Deshboard = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/deshboard/Reservation'>
-                                    <FaCalendar /> Reservation
+                                <NavLink to='/deshboard/payment-history'>
+                                    <RiHistoryLine /> Payment History
                                 </NavLink>
                             </li>
                             <li>
