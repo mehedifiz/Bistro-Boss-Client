@@ -12,7 +12,7 @@ const CheckOutfrom = () => {
     const elements = useElements();
   const axiosSecure = useAxios();
   const {user} = useAuth();
-  const [tarID , setTraID] = useState('')
+  const [transectionID , setTransectionID] = useState('')
 
   const [cart] = useCart();
 
@@ -84,7 +84,22 @@ const CheckOutfrom = () => {
 
             if(paymentIntent.status === 'succeeded'){
               toast.success(`Payment succeeded` ,paymentIntent.id )
-              setTraID(paymentIntent.id)
+              setTransectionID(paymentIntent.id)
+
+              //save payment in the database 
+              const payment ={
+                email: user.email,
+                price ,
+                transectionID : transectionID,
+                date : new Date() ,// todo :  moment js
+                cartIds : cart.map(item => item._id),
+                menuitemIds : cart.map(item => item.menuId),
+                status : 'Pending',
+                 }
+                 console.log(payment)
+
+            const res = await  axiosSecure.post('/payments' , payment);
+             console.log( " save payment " , res.data)
             }
 
             
@@ -114,7 +129,7 @@ const CheckOutfrom = () => {
         Pay
       </button>
       <p className="text-red-600">{error}</p>
-       {tarID && <p className="text-green-500">Your Transaction id: {tarID}</p>
+       {transectionID && <p className="text-green-500">Your Transaction id: {transectionID}</p>
       }
        </form>
     );
