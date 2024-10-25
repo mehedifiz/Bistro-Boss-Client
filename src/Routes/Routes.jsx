@@ -16,6 +16,8 @@ import Manageitems from "../Pages/Deshboard/Manageitems/Manageitems";
 import Updateitem from "../Pages/Deshboard/Updateitem/Updateitem";
 import Payment from "../Pages/Deshboard/Payment/Payment";
 import PaymentHistory from "../Pages/Deshboard/Payment/PaymentHistory";
+import Userhome from "../Pages/Deshboard/Userhome/Userhome";
+import Adminhome from "../Pages/Deshboard/Adminhome/Adminhome";
 
 
 
@@ -49,6 +51,10 @@ export const router = createBrowserRouter([
           path:'/secret',
           element:<PrivateRoute><Screet></Screet></PrivateRoute>
         }
+      // {
+        //   path: '/user-home',
+        //   element: <Userhome></Userhome>
+        // }
 
 
       ]
@@ -69,11 +75,18 @@ export const router = createBrowserRouter([
           path: 'payment-history',
           element: <PaymentHistory></PaymentHistory>
         },
+        {
+          path: 'user-home',
+          element:<Userhome></Userhome>
+        },
           //admin 
         
         {
           path:'additems',
           element: <AdminRoute><Additems></Additems></AdminRoute>
+        },{
+          path:'admin-home',
+          element: <AdminRoute><Adminhome></Adminhome></AdminRoute>
         },
 
           {

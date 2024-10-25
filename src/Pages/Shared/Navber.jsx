@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { BsCart3 } from "react-icons/bs";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navber = () => {
   const {user ,logout} = useContext(Authcontext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart()
   const handleLogout = ()=>{
     logout()
@@ -26,7 +28,17 @@ const Navber = () => {
     <li><Link  className="btn btn-ghost" to='/'>Home</Link></li>
      <li><Link  className="btn btn-ghost" to='/menu'>Our Menu</Link></li>
     <li><Link  className="btn btn-ghost" to='/order/salad'>Order Food</Link></li>
-    <li><Link  className="btn btn-ghost" to='/secret'>sc</Link></li>
+
+      {
+         user && isAdmin &&    <li><Link  className="btn btn-ghost" to='/deshboard/admin-home'>Deshboard </Link></li> 
+      }
+      {
+         user && !isAdmin &&    <li><Link  className="btn btn-ghost" to='/deshboard/user-home'>Deshboard </Link></li> 
+      }
+
+
+
+     
     <li><Link  className="btn btn-ghost" to='/deshboard/cart'>
     <button className="btn">
     <BsCart3 />
@@ -37,7 +49,7 @@ const Navber = () => {
     
 
     {
-      user ? <>
+      user  ? <>
         {/* <span className="btn btn-ghost">{user?.displayName}</span> */}
           <Link onClick={handleLogout} className="btn btn-ghost">Logout</Link>
       
