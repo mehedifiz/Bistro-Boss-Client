@@ -1,24 +1,23 @@
 import React from 'react';
-import img from '../../assets/home/chef-service.jpg'; // Path to your background image
+const  img = 'https://i.ibb.co.com/g7HZ796/pexels-photo-262918.jpg'; 
 
 const About = () => {
     return (
         <div
-            className="min-h-96 bg-fixed  my-10 flex items-center justify-center"
+            className="min-h-96 bg-fixed bg-cover bg-center my-10 flex items-center justify-center"
             style={{
                 backgroundImage: `url(${img})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
             }}
-        > 
-        
+        >
             <div className="bg-white bg-opacity-90 p-10 rounded-md shadow-lg max-w-3xl text-center">
-                
-                <h1 className="text-4xl font-bold mb-4">Bistro Boss</h1>
+                <h1 className="text-4xl font-bold mb-4">About Bite-Bazar</h1>
                 <p className="text-lg text-gray-700">
-                    At Bistro Boss, we pride ourselves on delivering a culinary experience like no other.
-                    Our chef-driven menu highlights seasonal ingredients in simple, handcrafted dishes served
-                    straight from our kitchen. We’re committed to quality and excellence in every plate we serve.
+                    Welcome to Bite-Bazar, your ultimate destination for exploring a diverse range of cuisines and flavors. 
+                    Our mission is to connect food lovers with the finest culinary experiences, from local favorites to international delights.
+                </p>
+                <p className="text-lg text-gray-700 mt-4">
+                    Bite-Bazar ensures every meal brings quality and variety to your plate. With an emphasis on fresh ingredients 
+                    and handcrafted dishes, we invite you to discover new tastes and cherish old favorites with ease.
                 </p>
             </div>
         </div>

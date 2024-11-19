@@ -1,149 +1,115 @@
 import React from "react";
-import Sectiontitle from "../../../Comonents/Sectiontitle";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
-import useAxiosPublic from '../../../Hooks/useAxiosPublic';
-import useAxios from "../../../Hooks/useAxios";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxios from "../../../Hooks/useAxios";
 
-const imageHosting =  import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
-const Additems = () => {
+const AddFoodItem = () => {
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
-  const axiosSecure= useAxios()
+  const axiosSecure = useAxios();
 
+  const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
-  const imageHosting_api =`https://api.imgbb.com/1/upload?key=${imageHosting}`
   const onSubmit = async (data) => {
+    // Logging form data for debugging
     console.log(data);
-  
-    // Image upload and get URL
-    const image = data.image[0];
+
+    // Extract and upload image to the hosting service
+    const imageFile = data.image[0];
     const formData = new FormData();
-    formData.append('image', image);
-  
-    
-      const res = await axiosPublic.post(imageHosting_api, formData); 
-  
-      console.log(res.data);
-      if(res.data.success){
-        //send the menu items data with image url
-          const menuItem = {
-            name : data.name,
-            price : parseInt(data.price),
-            category : data.category,
-            recipe : data.recipe,
-            image : res.data.data.display_url
+    formData.append("image", imageFile);
 
-          }
+    try {
+      const imageResponse = await axiosPublic.post(imageHostingApi, formData);
 
-          //send meni items in backend or database
+      if (imageResponse.data.success) {
+        // Prepare the food item data with the image URL from the response
+        const foodData = {
+          name: data.name,
+          category: data.category,
+          price: parseFloat(data.price),
+          recipe: data.recipe,
+          image: imageResponse.data.data.display_url,
+        };
 
-          const menuRes = await axiosSecure.post('/menu' , menuItem)
+        // Send food item data to the backend
+        const response = await axiosSecure.post("/menu", foodData);
 
-          if(menuRes.data.insertedId){
-
-            toast.success(`${menuItem.name} added in menu page. `)
-
-          }
-
-          
-
+        if (response.data.insertedId) {
+          toast.success(`${foodData.name} has been added to the menu!`);
+        }
       }
-
-    
+    } catch (error) {
+      console.error("Error adding food item:", error);
+    }
   };
-  
 
   return (
-    <div>
-      <Sectiontitle
-        heading="Add an item"
-        subheading={"what's new ?"}
-      ></Sectiontitle>
+    <div className="min-h-screen bg-gray-100 p-8">
+      <h1 className="text-3xl font-bold text-center mb-8">Add a Food Item</h1>
 
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label className="form-control w-full my-6">
-            <div className="label">
-              <span className="label-text">racipe name*</span>
-            </div>
-            <input
-              {...register("name",{required : true})}
-              type="text"
-              placeholder="Racipe Name"
-              className="input input-bordered w-full "
-            />
-          </label>
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 shadow-md rounded-lg max-w-lg mx-auto">
+        <label className="block mb-4">
+          <span className="text-gray-700">Food Name*</span>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input input-bordered w-full mt-1"
+            placeholder="Enter food name"
+          />
+        </label>
 
-          <div className="flex w-full gap-">
-            {" "}
-            {/* Ensure the flex container is full width */}
-            {/* category */}
-            <div className="my-6 w-full">
-              {" "}
-              {/* Set width of child div to full */}
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Category name*</span>
-                </div>
-              </label>
-              <select
-              defaultValue='default'
-                {...register("category" ,{required : true})}
-                className="select select-bordered w-full"
-              >
-                <option disabled value='default'>
-                  Select a category
-                </option>
-                <option value="Salad">Salad</option>
-                <option value="pizza">Pizza</option>
-                <option value="soup">Soup</option>
-                <option value="drinks">Drinks</option>
-                <option value="dessert">Dessert</option>
-              </select>
-            </div>
-            {/* Price */}
-            <div className="my-6 w-full">
-              {" "}
-              {/* Set width of child div to full */}
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Recipe Price*</span>
-                </div>
-                <input
-                  {...register("price" ,{required : true})}
-                  type="text"
-                  placeholder="Recipe Price"
-                  className="input input-bordered w-full"
-                />
-              </label>
-            </div>
+        <label className="block mb-4">
+          <span className="text-gray-700">Category*</span>
+          <select {...register("category", { required: true })} className="select select-bordered w-full mt-1">
+            <option value="" disabled>Select a category</option>
+            <option value="Salad">Salad</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Soup">Soup</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Dessert">Dessert</option>
+          </select>
+        </label>
 
-            {/* Recipe  */}
+        <label className="block mb-4">
+          <span className="text-gray-700">Price ($)*</span>
+          <input
+            type="number"
+            {...register("price", { required: true })}
+            className="input input-bordered w-full mt-1"
+            placeholder="Enter price"
+          />
+        </label>
 
-            
-          </div>
+        <label className="block mb-4">
+          <span className="text-gray-700">Recipe Details</span>
+          <textarea
+            {...register("recipe")}
+            className="textarea textarea-bordered w-full mt-1"
+            rows="4"
+            placeholder="Enter ingredients, procedure, etc."
+          ></textarea>
+        </label>
 
-          <div>
-          <textarea 
-          {...register('recipe')}
-          className="textarea textarea-bordered h-24 w-full my-6" placeholder="Bio"></textarea>
-                    </div>
+        <label className="block mb-4">
+          <span className="text-gray-700">Food Image*</span>
+          <input
+            type="file"
+            {...register("image", { required: true })}
+            className="file-input file-input-bordered w-full"
+          />
+        </label>
 
-          <div>
-          <input 
-          {...register('image' ,{required : true})}
-          type="file" className="file-input file-input-bordered w-full max-w-xs my-6" />
-          </div>
-
-          <button className="btn">Add Item <FaUtensils className="ml-4"></FaUtensils></button>
-
-        </form>
-      </div>
+        <button type="submit" className="btn w-full bg-green-600 text-white mt-4">
+          Add Food Item <FaUtensils className="ml-2" />
+        </button>
+      </form>
     </div>
   );
 };
 
-export default Additems;
+export default AddFoodItem;
